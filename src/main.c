@@ -4,11 +4,13 @@ void initializePic(){
     PORTA = 0x00000000;
     PORTB = 0x00000000;
 }
+
+readValueResistor()
+
 void main(){
     initializePic();
         
     while(1){
-        Delay_100ms();
-        RB0_bit = ~RB0_bit;
+        readValueResistor(RESISTORPORT);
     }
 }
