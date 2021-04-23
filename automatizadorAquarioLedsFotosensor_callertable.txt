@@ -1,1 +1,3 @@
 main
+	initializePic
+	Delay_100ms
