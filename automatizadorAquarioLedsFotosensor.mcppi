@@ -43,8 +43,7 @@ Count=0
 Count=0
 [Useses]
 File0=ADC
-File1=Software_UART
-Count=2
+Count=1
 [EXPANDED_NODES]
 0=automatizadorAquarioLedsFotosensor.mcppi
 1=Sources
