@@ -42,7 +42,9 @@ Count=0
 [PLDS]
 Count=0
 [Useses]
-Count=0
+File0=ADC
+File1=Software_UART
+Count=2
 [EXPANDED_NODES]
 0=automatizadorAquarioLedsFotosensor.mcppi
 1=Sources
@@ -51,7 +53,8 @@ Count=3
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
-Count=2
+208=Software_UART
+Count=3
 [PROGRAMMER_TYPE]
 Value=mikroE mikroProg
 [CODEGRIP_OPTIONS]

@@ -287,6 +287,10 @@ setfdz32
 setfov32
 setfun32
 setiov3224
+soft_uart_break
+soft_uart_init
+soft_uart_read
+soft_uart_write
 status
 sub_32x32_fp
 swap
