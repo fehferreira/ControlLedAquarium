@@ -1,9 +1,9 @@
-#define RESISTOR_PORT RB1_bit;
+#define RESISTOR_PORT RB1_bit
 
-#define RX_PIN 7;
-#define TX_PIN 6;
-#define USART_BAUDRATE 9600;
-#define INVERT_FLAG 0;
+#define RX_PIN 7
+#define TX_PIN 6
+#define USART_BAUDRATE 9600
+#define INVERT_FLAG 0
 
 unsigned readValueResistor(unsigned short portReader){
     return ADC_Read(portReader);
@@ -24,7 +24,6 @@ void main(){
     initializePic();
         
     while(1){
-        value = readValueResistor(RESISTOR_PORT);
-        Soft_UART_Write(value);
+        Soft_UART_Write(readValueResistor(RESISTOR_PORT));
     }
 }
