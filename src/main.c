@@ -9,26 +9,54 @@ volatile unsigned short quant_values_eeprom,
                         last_value_eeprom,
                         read_control_led;
 
+char hour = 0,
+     minute = 0,
+     sec = 0,
+     ms = 0;
+
 unsigned readValueResistor(char portRead){
     return ADC_Read(portRead);
 }
 
 void configTMR1(void){
-  T1CON	        = 0x31;
-  TMR1IF_bit	= 0;
-  TMR1H	        = 0x0B;
-  TMR1L	        = 0xDC;
-  TMR1IE_bit	= 1;
+    T1CON	        = 0x31;
+    TMR1IF_bit	= 0;
+    TMR1H	        = 0x0B;
+    TMR1L	        = 0xDC;
+    TMR1IE_bit	= 1;
   
-  GIE_bit       = 1;
-  PEIE_bit      = 1;
+    GIE_bit       = 1;
+    PEIE_bit      = 1;
+}
+
+void resetTMR1(void){
+    TMR1IF_bit = 0;
+    TMR1H	 = 0x0B;
+    TMR1L	 = 0xDC;
+}
+
+void interrupt(){
+  if (TMR1IF_bit){
+    resetTMR1();
+    ms++;
+  }
 }
 
 void read24hValues(void){
     configTMR1();
     
-    
-    
+    while(hour < 24){
+        while(minute < 60){
+            while(sec < 60){
+                while(ms < 4);
+                ms = 0;
+            }
+            sec = 0;
+        }
+        minute = 0;
+        
+        updateValueEEPROM();
+    }
 }
 
 void updatingEepromData(void){
