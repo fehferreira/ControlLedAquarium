@@ -12,6 +12,13 @@ __math_tempb
 __math_tempbd
 __savepclath
 __savestatus
+_adc_external_vrefh
+_adc_internal_vrefh
+adc_get_sample
+adc_get_sample_ptr
+adc_init
+adc_init_advanced
+adc_read
 adcon0
 adcon1
 adcs0
@@ -369,6 +376,7 @@ tt1ck
 tt1ck_bit
 vdelay_advanced_ms
 vdelay_ms
+vref_mask
 w
 word2double
 z

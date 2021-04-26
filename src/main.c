@@ -1,3 +1,5 @@
+#define RESISTORPORT RB1_bit;
+
 void initializePic(){
     TRISA = 0x11111111;
     TRISB = 0x11111110;
@@ -5,7 +7,9 @@ void initializePic(){
     PORTB = 0x00000000;
 }
 
-readValueResistor()
+unsigned readValueResistor(unsigned short portReader){
+    return ADC_Read(portReader);
+}
 
 void main(){
     initializePic();
