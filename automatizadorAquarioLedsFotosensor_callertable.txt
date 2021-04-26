@@ -1,5 +1,6 @@
 main
 	initializePic
 		ADC_Init
-	ADC_Read
-		Delay_22us
+	readValueResistor
+		ADC_Read
+			Delay_22us

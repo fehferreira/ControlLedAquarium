@@ -1,6 +1,10 @@
 #line 1 "C:/Users/Felipe-Oficina/Documents/Programação/MIKROC/automatizadorAquarioLedsFotosensor/src/main.c"
 
 
+unsigned readValueResistor(char portRead){
+ return ADC_Read(portRead);
+}
+
 void initializePic(){
  TRISA = 0x11111111;
  TRISB = 0x00000000;
@@ -14,6 +18,6 @@ void main(){
  initializePic();
 
  while(1){
- PORTB = ADC_Read( RA0_bit );
+ PORTB = readValueResistor( RA0_bit );
  }
 }

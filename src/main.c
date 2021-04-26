@@ -1,5 +1,9 @@
 #define RESISTOR_PORT RA0_bit
 
+unsigned readValueResistor(char portRead){
+    return ADC_Read(portRead);
+}
+
 void initializePic(){
     TRISA = 0x11111111;
     TRISB = 0x00000000;
@@ -13,6 +17,6 @@ void main(){
     initializePic();
         
     while(1){
-        PORTB = ADC_Read(RESISTOR_PORT);
+        PORTB = readValueResistor(RESISTOR_PORT);
     }
 }
