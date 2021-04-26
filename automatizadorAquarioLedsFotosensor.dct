@@ -140,6 +140,7 @@ cmif
 cmif_bit
 comfrem
 compare_double
+configtmr1
 cren
 cren_bit
 csrc
@@ -228,6 +229,7 @@ go_done
 go_done_bit
 go_not_done
 go_not_done_bit
+hour
 ibf
 ibf_bit
 ibf_trise_bit
@@ -244,13 +246,17 @@ inte
 inte_bit
 intedg
 intedg_bit
+interrupt
 intf
 intf_bit
 irp
 irp_bit
+last_value_eeprom
 longint2double
 longword2double
 main
+minute
+ms
 mul_16x16_s
 mul_16x16_u
 mul_32x32_fp
@@ -337,6 +343,7 @@ pspif_bit
 pspmode
 pspmode_bit
 pspmode_trise_bit
+quant_values_eeprom
 r
 r_bit
 r_not_w
@@ -445,10 +452,13 @@ re1
 re1_bit
 re2
 re2_bit
+read_control_led
 read_write
 read_write_bit
+read24hvalues
 readvalueresistor
 res032
+resettmr1
 rp0
 rp0_bit
 rp1
@@ -462,6 +472,7 @@ rx9d_bit
 s
 s_bit
 sdiv3232l
+sec
 sen
 sen_bit
 setfdz32
@@ -646,6 +657,7 @@ txreg
 txsta
 ua
 ua_bit
+updatingeepromdata
 vdelay_advanced_ms
 vdelay_ms
 vref_mask

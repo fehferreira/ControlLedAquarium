@@ -1,6 +1,11 @@
 main
+	__CC2DW
+		____DoICP
 	initializePic
 		ADC_Init
-	readValueResistor
-		ADC_Read
-			Delay_22us
+		updatingEepromData
+			EEPROM_Read
+			read24hValues
+				configTMR1
+interrupt
+	resetTMR1

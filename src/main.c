@@ -46,16 +46,19 @@ void read24hValues(void){
     configTMR1();
     
     while(hour < 24){
-        while(minute < 60){
-            while(sec < 60){
-                while(ms < 4);
-                ms = 0;
-            }
-            sec = 0;
+        if(ms >= 4){
+            ms = 0;
+            sec++;
         }
-        minute = 0;
-        
-        updateValueEEPROM();
+        if(sec >= 60){
+            sec = 0;
+            minute++;
+        }
+        if(minute >= 60){
+            minute = 0;
+            hour++;
+            //updateValueEEPROM();
+        }
     }
 }
 
