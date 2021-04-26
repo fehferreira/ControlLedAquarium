@@ -13,13 +13,36 @@ unsigned readValueResistor(char portRead){
     return ADC_Read(portRead);
 }
 
-void updatingEepromData(){
+void configTMR1(void){
+  T1CON	        = 0x31;
+  TMR1IF_bit	= 0;
+  TMR1H	        = 0x0B;
+  TMR1L	        = 0xDC;
+  TMR1IE_bit	= 1;
+  
+  GIE_bit       = 1;
+  PEIE_bit      = 1;
+}
+
+void read24hValues(void){
+    configTMR1();
+    
+    
+    
+}
+
+void updatingEepromData(void){
     quant_values_eeprom = EEPROM_Read(QUANT_VALUE_EEPROM);
     read_control_led    = EEPROM_Read(READ_CONTROL_LED);
     last_value_eeprom   = EEPROM_Read(LAST_POSITION_EEPROM);
+    
+    if(read_control_led)
+        return;
+
+    read24hValues();
 }
 
-void initializePic(){
+void initializePic(void){
     TRISA = 0x11111111;
     TRISB = 0x00000000;
     PORTA = 0x00000000;
@@ -29,7 +52,7 @@ void initializePic(){
     updatingEepromData();
 }
 
-void main(){
+void main(void){
     initializePic();
         
     while(1){
