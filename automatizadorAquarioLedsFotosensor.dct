@@ -208,6 +208,8 @@ eeif
 eeif_bit
 eepgd
 eepgd_bit
+eeprom_read
+eeprom_write
 equals_double
 f
 ferr
