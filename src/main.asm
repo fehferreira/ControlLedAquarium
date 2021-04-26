@@ -17,7 +17,7 @@ _initializePic:
 ;main.c,13 :: 		TRISA = 0x11111111;
 	MOVLW      17
 	MOVWF      TRISA+0
-;main.c,14 :: 		TRISB = 0x11111110;
+;main.c,14 :: 		TRISB = 0x10111110;
 	MOVLW      16
 	MOVWF      TRISB+0
 ;main.c,15 :: 		PORTA = 0x00000000;
@@ -56,7 +56,7 @@ _main:
 L_main0:
 ;main.c,27 :: 		Soft_UART_Write(readValueResistor(RESISTOR_PORT));
 	MOVLW      0
-	BTFSC      RB1_bit+0, BitPos(RB1_bit+0)
+	BTFSC      RA0_bit+0, BitPos(RA0_bit+0)
 	MOVLW      1
 	MOVWF      FARG_readValueResistor_portReader+0
 	CALL       _readValueResistor+0
