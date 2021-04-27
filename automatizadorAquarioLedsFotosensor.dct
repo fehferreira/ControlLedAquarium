@@ -456,9 +456,7 @@ read_control_led
 read_write
 read_write_bit
 read24hvalues
-readvalueresistor
 res032
-resettmr1
 rp0
 rp0_bit
 rp1
@@ -657,6 +655,7 @@ txreg
 txsta
 ua
 ua_bit
+updatevalueeeprom
 updatingeepromdata
 vdelay_advanced_ms
 vdelay_ms

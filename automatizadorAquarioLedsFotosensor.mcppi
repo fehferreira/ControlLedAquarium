@@ -43,7 +43,8 @@ Count=0
 Count=0
 [Useses]
 File0=ADC
-Count=1
+File1=EEPROM
+Count=2
 [EXPANDED_NODES]
 0=automatizadorAquarioLedsFotosensor.mcppi
 1=Sources

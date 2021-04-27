@@ -15,10 +15,6 @@ char hour = 0,
  sec = 0,
  ms = 0;
 
-unsigned readValueResistor(char portRead){
- return ADC_Read(portRead);
-}
-
 void configTMR1(void){
  T1CON = 0x31;
  TMR1IF_bit = 0;
@@ -30,17 +26,20 @@ void configTMR1(void){
  PEIE_bit = 1;
 }
 
-void resetTMR1(void){
+void interrupt(){
+ if (TMR1IF_bit){
  TMR1IF_bit = 0;
  TMR1H = 0x0B;
  TMR1L = 0xDC;
-}
-
-void interrupt(){
- if (TMR1IF_bit){
- resetTMR1();
  ms++;
  }
+}
+
+void updateValueEEPROM(void){
+ unsigned short valueRead = (unsigned short) ADC_Read( RA0_bit );
+ quant_values_eeprom++;
+ EEPROM_Write( 0x0000  + quant_values_eeprom, valueRead);
+ EEPROM_Write( 0x0001 ,quant_values_eeprom);
 }
 
 void read24hValues(void){
@@ -58,7 +57,7 @@ void read24hValues(void){
  if(minute >= 60){
  minute = 0;
  hour++;
-
+ updateValueEEPROM();
  }
  }
 }
@@ -67,11 +66,6 @@ void updatingEepromData(void){
  quant_values_eeprom = EEPROM_Read( 0x0001 );
  read_control_led = EEPROM_Read( 0x0002 );
  last_value_eeprom = EEPROM_Read( 0x001A );
-
- if(read_control_led)
- return;
-
- read24hValues();
 }
 
 void initializePic(void){
@@ -86,6 +80,8 @@ void initializePic(void){
 
 void main(void){
  initializePic();
+
+ if(!read_control_led)read24hValues();
 
  while(1){
 
