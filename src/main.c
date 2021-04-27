@@ -34,9 +34,8 @@ void interrupt(){
 }
 
 void updateValueEEPROM(void){
-    unsigned short valueRead = (unsigned short) ADC_Read(RESISTOR_PORT);
     quant_values_eeprom++;
-    EEPROM_Write(INITIAL_POSITION_EEPROM + quant_values_eeprom, valueRead);
+    EEPROM_Write(INITIAL_POSITION_EEPROM + quant_values_eeprom,ADC_Read(RESISTOR_PORT));
     EEPROM_Write(QUANT_VALUE_EEPROM,quant_values_eeprom);
 }
 
@@ -58,6 +57,8 @@ void read24hValues(void){
             updateValueEEPROM();
         }
     }
+    
+    EEPROM_Write(READ_CONTROL_LED,0x00);
 }
 
 void updatingEepromData(void){
@@ -81,6 +82,8 @@ void main(void){
     if(EEPROM_Read(READ_CONTROL_LED))read24hValues();
         
     while(1){
+
+
 
     }
 }
