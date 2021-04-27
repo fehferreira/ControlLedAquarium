@@ -2,22 +2,22 @@
 _configTMR1:
 
 ;main.c,17 :: 		void configTMR1(void){
-;main.c,18 :: 		T1CON                = 0x31;
+;main.c,18 :: 		T1CON       = 0x31;
 	MOVLW      49
 	MOVWF      T1CON+0
-;main.c,19 :: 		TMR1IF_bit        = 0;
+;main.c,19 :: 		TMR1IF_bit  = 0;
 	BCF        TMR1IF_bit+0, BitPos(TMR1IF_bit+0)
-;main.c,20 :: 		TMR1H                = 0x0B;
+;main.c,20 :: 		TMR1H       = 0x0B;
 	MOVLW      11
 	MOVWF      TMR1H+0
-;main.c,21 :: 		TMR1L                = 0xDC;
+;main.c,21 :: 		TMR1L       = 0xDC;
 	MOVLW      220
 	MOVWF      TMR1L+0
-;main.c,22 :: 		TMR1IE_bit        = 1;
+;main.c,22 :: 		TMR1IE_bit  = 1;
 	BSF        TMR1IE_bit+0, BitPos(TMR1IE_bit+0)
-;main.c,24 :: 		GIE_bit       = 1;
+;main.c,24 :: 		GIE_bit     = 1;
 	BSF        GIE_bit+0, BitPos(GIE_bit+0)
-;main.c,25 :: 		PEIE_bit      = 1;
+;main.c,25 :: 		PEIE_bit    = 1;
 	BSF        PEIE_bit+0, BitPos(PEIE_bit+0)
 ;main.c,26 :: 		}
 L_end_configTMR1:
@@ -37,12 +37,12 @@ _interrupt:
 ;main.c,29 :: 		if (TMR1IF_bit){
 	BTFSS      TMR1IF_bit+0, BitPos(TMR1IF_bit+0)
 	GOTO       L_interrupt0
-;main.c,30 :: 		TMR1IF_bit = 0;
+;main.c,30 :: 		TMR1IF_bit  = 0;
 	BCF        TMR1IF_bit+0, BitPos(TMR1IF_bit+0)
-;main.c,31 :: 		TMR1H         = 0x0B;
+;main.c,31 :: 		TMR1H       = 0x0B;
 	MOVLW      11
 	MOVWF      TMR1H+0
-;main.c,32 :: 		TMR1L         = 0xDC;
+;main.c,32 :: 		TMR1L       = 0xDC;
 	MOVLW      220
 	MOVWF      TMR1L+0
 ;main.c,33 :: 		ms++;

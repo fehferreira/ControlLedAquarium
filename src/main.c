@@ -6,30 +6,29 @@
 #define LAST_POSITION_EEPROM    0x001A
 
 volatile unsigned short quant_values_eeprom,
-                        last_value_eeprom,
-                        read_control_led;
+                        last_value_eeprom;
 
-char hour = 0,
+char hour   = 0,
      minute = 0,
-     sec = 0,
-     ms = 0;
+     sec    = 0,
+     ms     = 0;
 
 void configTMR1(void){
-    T1CON                = 0x31;
-    TMR1IF_bit        = 0;
-    TMR1H                = 0x0B;
-    TMR1L                = 0xDC;
-    TMR1IE_bit        = 1;
+    T1CON       = 0x31;
+    TMR1IF_bit  = 0;
+    TMR1H       = 0x0B;
+    TMR1L       = 0xDC;
+    TMR1IE_bit  = 1;
   
-    GIE_bit       = 1;
-    PEIE_bit      = 1;
+    GIE_bit     = 1;
+    PEIE_bit    = 1;
 }
 
 void interrupt(){
     if (TMR1IF_bit){
-        TMR1IF_bit = 0;
-        TMR1H         = 0x0B;
-        TMR1L         = 0xDC;
+        TMR1IF_bit  = 0;
+        TMR1H       = 0x0B;
+        TMR1L       = 0xDC;
         ms++;
     }
 }
@@ -63,7 +62,6 @@ void read24hValues(void){
 
 void updatingEepromData(void){
     quant_values_eeprom = EEPROM_Read(QUANT_VALUE_EEPROM);
-    read_control_led    = EEPROM_Read(READ_CONTROL_LED);
     last_value_eeprom   = EEPROM_Read(LAST_POSITION_EEPROM);
 }
 
@@ -80,7 +78,7 @@ void initializePic(void){
 void main(void){
     initializePic();
     
-    if(!read_control_led)read24hValues();
+    if(EEPROM_Read(READ_CONTROL_LED))read24hValues();
         
     while(1){
 

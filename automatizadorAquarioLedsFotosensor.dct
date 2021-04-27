@@ -64,6 +64,7 @@ bf_bit
 boot16_delay_5ms
 brgh
 brgh_bit
+button
 byte2double
 c
 c_bit
