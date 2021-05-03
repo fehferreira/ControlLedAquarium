@@ -5,10 +5,13 @@ main
 		ADC_Init
 		updatingEepromData
 			EEPROM_Read
+	Delay_1sec
+	EEPROM_Read
 	read24hValues
 		configTMR1
 		updateValueEEPROM
 			ADC_Read
 				Delay_22us
 			EEPROM_Write
+		EEPROM_Write
 interrupt
