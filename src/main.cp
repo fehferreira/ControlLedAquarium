@@ -6,9 +6,10 @@
 
 
 
+
+
 volatile unsigned short quant_values_eeprom,
- last_value_eeprom,
- read_control_led;
+ last_value_eeprom;
 
 char hour = 0,
  minute = 0,
@@ -36,13 +37,15 @@ void interrupt(){
 }
 
 void updateValueEEPROM(void){
- unsigned short valueRead = (unsigned short) ADC_Read( RA0_bit );
  quant_values_eeprom++;
- EEPROM_Write( 0x0000  + quant_values_eeprom, valueRead);
+ EEPROM_Write( 0x0000  + quant_values_eeprom,ADC_Read( RA0_bit ));
  EEPROM_Write( 0x0001 ,quant_values_eeprom);
 }
 
 void read24hValues(void){
+  RD1_bit  = 1;
+  RD2_bit  = 0;
+
  configTMR1();
 
  while(hour < 24){
@@ -60,19 +63,24 @@ void read24hValues(void){
  updateValueEEPROM();
  }
  }
+
+ EEPROM_Write( 0x0002 ,0x00);
 }
 
 void updatingEepromData(void){
  quant_values_eeprom = EEPROM_Read( 0x0001 );
- read_control_led = EEPROM_Read( 0x0002 );
  last_value_eeprom = EEPROM_Read( 0x001A );
 }
 
 void initializePic(void){
- TRISA = 0x11111111;
- TRISB = 0x00000000;
- PORTA = 0x00000000;
- PORTB = 0x00000000;
+ TRISA = 0b11111111;
+ TRISB = 0b00000000;
+ TRISD = 0b11111001;
+ PORTA = 0b00000000;
+ PORTB = 0b00000000;
+
+  RD2_bit  = 1;
+  RD1_bit  = 0;
 
  ADC_Init();
  updatingEepromData();
@@ -81,9 +89,13 @@ void initializePic(void){
 void main(void){
  initializePic();
 
- if(!read_control_led)read24hValues();
+ Delay_1sec();
+
+ if(EEPROM_Read( 0x0002 ))read24hValues();
 
  while(1){
+
+
 
  }
 }

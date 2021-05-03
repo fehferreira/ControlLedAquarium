@@ -64,7 +64,6 @@ bf_bit
 boot16_delay_5ms
 brgh
 brgh_bit
-button
 byte2double
 c
 c_bit
@@ -453,7 +452,6 @@ re1
 re1_bit
 re2
 re2_bit
-read_control_led
 read_write
 read_write_bit
 read24hvalues

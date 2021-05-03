@@ -4,6 +4,8 @@
 #define QUANT_VALUE_EEPROM      0x0001
 #define READ_CONTROL_LED        0x0002
 #define LAST_POSITION_EEPROM    0x001A
+#define POWERON                 RD1_bit
+#define POWEROFF                RD2_bit
 
 volatile unsigned short quant_values_eeprom,
                         last_value_eeprom;
@@ -40,6 +42,9 @@ void updateValueEEPROM(void){
 }
 
 void read24hValues(void){
+    POWERON = 1;
+    POWEROFF = 0;
+
     configTMR1();
     
     while(hour < 24){
@@ -67,10 +72,14 @@ void updatingEepromData(void){
 }
 
 void initializePic(void){
-    TRISA = 0x11111111;
-    TRISB = 0x00000000;
-    PORTA = 0x00000000;
-    PORTB = 0x00000000;
+    TRISA = 0b11111111;
+    TRISB = 0b00000000;
+    TRISD = 0b11111001;
+    PORTA = 0b00000000;
+    PORTB = 0b00000000;
+    
+    POWEROFF = 1;
+    POWERON = 0;
 
     ADC_Init();
     updatingEepromData();
@@ -78,6 +87,8 @@ void initializePic(void){
 
 void main(void){
     initializePic();
+    
+    Delay_1sec();
     
     if(EEPROM_Read(READ_CONTROL_LED))read24hValues();
         
